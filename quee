@@ -1,0 +1,57 @@
+#include<iostream.h>
+#define size 50
+struct quee{
+     int top;
+     int elements[size]; 
+};
+bool full(quee*);
+bool empty(quee*);
+int dequee(quee *);
+void equee(quee *k,int);
+void equee(quee *k,int value){
+     if(!full(k))
+     k->elements[k->top++]=value;
+     else
+     printf("quee dolu");
+}
+bool full(quee *k){
+     if(k->top>=size)
+     return true;
+     else 
+     return false;
+}
+int dequee(quee *k){
+     if(!empty(k)){
+      int value=k->elements[0];
+      for(int i=1;i<k->top;i++){
+           k->elements[i-1]= k->elements[i];
+      }
+      k->top--;
+      return value;   
+     }
+     else{
+         printf("quee is empty");
+         return -1; 
+     }           
+}
+bool empty(quee *k){
+     if(k->top<=0)
+     return true;
+     else 
+     return false;
+}
+
+
+main(){
+       quee k;
+       equee(&k,10);
+       equee(&k,20);
+       equee(&k,30);
+       printf("%d\n",dequee(&k));
+       printf("%d \n",dequee(&k));
+       equee(&k,560);
+       printf("%d\n",dequee(&k));
+       printf("%d \n",dequee(&k));
+       printf("%d \n",dequee(&k));
+       system("pause");
+}
