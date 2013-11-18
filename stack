@@ -1,0 +1,61 @@
+#include <iostream.h>
+#define size 50
+struct stack{
+    int yi;    
+    int elements[50];     
+};
+bool full(stack*);
+bool empty(stack*);
+void push(stack *,int);
+int pop(stack *);
+void push(stack *y,int value){
+     if(!full(y)){           
+        y->elements[y->yi++]= value;       
+     }
+     else 
+     printf("stack is full");
+}
+bool full(stack *y){
+     if(y->yi>=size)
+     return true;
+     else 
+     return false;
+}
+int pop(stack *y){
+     if(!empty(y))
+     return y->elements[--y->yi];
+     else{
+     printf("stack is empty\n");  
+     return NULL;
+     }     
+}
+bool empty(stack *y){
+     if(y->yi<=0)
+     return true;
+     else 
+     return false;
+}
+void show(stack *y){
+     int indis=y->yi-1;
+     if(indis>=0){
+             for(;indis>-1;indis--){
+             printf("%d-%d\n",indis,y->elements[indis]);                
+             }     
+     }
+}
+main(){
+      stack y;
+      y.yi=0;
+      push(&y,50);
+      push(&y,5);
+      push(&y,20);
+      push(&y,10);
+      show(&y);
+      printf("%d\n",pop(&y));
+      printf("%d\n",pop(&y));
+      printf("%d\n",pop(&y));
+      printf("%d\n",pop(&y));
+      printf("%d\n",pop(&y));
+      printf("%d\n",pop(&y));    
+      system("pause");       
+}
