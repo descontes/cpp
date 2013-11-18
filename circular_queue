@@ -1,0 +1,67 @@
+#include<iostream.h>
+#define size 4 
+struct quee{
+     int top;
+     int elements[size]; 
+};
+bool empty(quee*);
+int dequee(quee *);
+void equee(quee *k,int); 
+void show(quee*);
+void equee(quee *k,int value){
+     if(k->top==size)
+        dequee(k);
+     k->elements[k->top++]=value;
+     show(k);     
+}
+int dequee(quee *k){
+     if(!empty(k)){
+      int value=k->elements[0];
+      for(int i=1;i<k->top;i++){
+           k->elements[i-1]= k->elements[i];           
+      }
+      k->top--;
+      return value;   
+     }
+     else{
+         printf("quee is emtpy");
+         return -1; 
+     }           
+}
+bool empty(quee *k){
+     if(k->top<=0)
+     return true;
+     else 
+     return false;
+}
+void show(quee *k){ 
+     for(int i=0;i<k->top;i++){
+         printf("\t%d-%d\n",i+1,k->elements[i]);          
+      } 
+      printf("-------------------------------------\n");  
+      
+      
+}
+main(){
+       quee k;
+       equee(&k,10);
+       equee(&k,20);
+       equee(&k,30);
+       equee(&k,40);
+       equee(&k,50);
+       equee(&k,60);
+       dequee(&k);
+       show(&k);
+       dequee(&k);
+       show(&k);
+       equee(&k,40);
+       dequee(&k);
+       show(&k);
+       dequee(&k);
+       show(&k);
+       dequee(&k);
+       show(&k);
+       dequee(&k);
+       show(&k);
+       system("pause");
+}
