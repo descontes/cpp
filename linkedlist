@@ -1,0 +1,69 @@
+#include<iostream.h>
+struct LIST{
+   int value;
+   LIST *prevLIST,*nextLIST; 
+};
+void add(LIST *list,int value){
+      LIST * lastlist,*newlist;
+      if(list->nextLIST==NULL)
+         lastlist=list;
+      else  
+         lastlist=list->nextLIST;  
+      newlist= new LIST();
+      newlist->nextLIST=NULL; 
+      newlist->prevLIST=lastlist;
+      newlist->value=value; 
+      list->nextLIST=newlist;
+      lastlist->nextLIST=newlist;
+      printf("\n+ ADDED LIST.ADDRESS=[%p],VALUE =%d\n" ,lastlist->nextLIST,value);
+}
+void remove(LIST *list,int value){    
+      LIST *lastlist=list->nextLIST;
+      while(lastlist->prevLIST!=NULL){
+              if(lastlist->value==value){                 
+                  if(lastlist->nextLIST!=NULL){ 
+                  lastlist->nextLIST->prevLIST=lastlist->prevLIST;
+                  if(lastlist->prevLIST->prevLIST!=NULL)                                 
+                  lastlist->prevLIST->nextLIST= lastlist->nextLIST;
+                  }
+                  else{
+                  lastlist->prevLIST->nextLIST= NULL;                
+                  list->nextLIST=lastlist->prevLIST; 
+                  }   
+                  printf("\n- LIST REMOVED.ADDRESS=[%p],VALUE =%d\n" ,lastlist,lastlist->value);   
+                             
+              }             
+              lastlist=lastlist->prevLIST;
+      }
+}
+void show(LIST *list){
+      printf("\n-------------------------------------\n");   
+      printf("\tSHOWING LIST.... \n\n");     
+      LIST *lastlist=list->nextLIST;   
+      while(lastlist->prevLIST!=NULL){
+              printf("$ LIST ADDRESS=[%p],VALUE=%d\n",lastlist,lastlist->value); 
+              lastlist=lastlist->prevLIST;              
+      }
+     printf("\n-------------------------------------\n");
+}
+main(){
+       LIST list;
+       list.nextLIST=NULL;
+       list.prevLIST=NULL;       
+       add(&list,15);
+       add(&list,45);
+       add(&list,75);  
+       add(&list,23);  
+       add(&list,34);  
+       add(&list,1);  
+       remove(&list,45); 
+       add(&list,2);  
+       add(&list,3); 
+       remove(&list,34); 
+       show(&list);   
+       remove(&list,15); 
+       add(&list,88);  
+       remove(&list,75); 
+       show(&list);       
+       system("pause");
+}
